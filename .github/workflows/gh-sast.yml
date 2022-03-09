@@ -15,10 +15,10 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '11'
+          java-version: '8'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn clean install -DskipTests=true
+        run: mvn clean install -DskipTests=true --global-toolchains ".github/workflows/maven-toolchains.xml"
       # CodeQL
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
