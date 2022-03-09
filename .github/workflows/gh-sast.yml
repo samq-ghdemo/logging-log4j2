@@ -17,13 +17,13 @@ jobs:
         with:
           java-version: '8'
           distribution: 'adopt'
-      - name: Build with Maven
-        run: mvn clean install -DskipTests=true --global-toolchains ".github/workflows/maven-toolchains.xml"
       # CodeQL
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
           languages: 'java'
+      - name: Build with Maven
+        run: mvn clean install -DskipTests=true --global-toolchains ".github/workflows/maven-toolchains.xml"
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
       - name: 'Upload CodeQL sarif'
