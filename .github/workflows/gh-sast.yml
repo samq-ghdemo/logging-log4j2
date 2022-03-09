@@ -12,13 +12,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+          distribution: 'adopt'
+      - name: Build with Maven
+        run: mvn clean install -DskipTests=true
       # CodeQL
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v1
         with:
           languages: 'java'
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v1
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
       - name: 'Upload CodeQL sarif'
