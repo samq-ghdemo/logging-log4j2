@@ -1,0 +1,29 @@
+name: CodeQL Scan
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  codeql:
+    name: CodeQL SAST
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      # CodeQL
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: 'java'
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v1
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v1
+      - name: 'Upload CodeQL sarif'
+        uses: actions/upload-artifact@v2
+        with:
+          name: CodeQL-sarif
+          path: /home/runner/work/${{ github.event.repository.name }}/results/java.sarif
+          retention-days: 1
